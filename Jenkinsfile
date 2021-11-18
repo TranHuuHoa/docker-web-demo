@@ -10,9 +10,9 @@ pipeline {
     }
     stage("run") {
       steps {
-        sh """
-          kubectl create deployment myweb --image=myweb:4.0
-        """
+        withKubeConfig([credentialsId: 'jenkins-robot-token', serverUrl: 'https://192.168.59.100:8443']) {
+          sh 'kubectl create deployment myweb --image=myweb:4.0'
+        }
       }
     }
   }
