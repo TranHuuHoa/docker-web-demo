@@ -11,7 +11,7 @@ pipeline {
     stage("run") {
       steps {
         sh """
-          docker run --name myweb -p 8081:8080 -d myweb:4.0
+          kubectl create deployment myweb --image=myweb:4.0
         """
       }
     }
