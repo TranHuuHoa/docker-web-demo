@@ -4,14 +4,14 @@ pipeline {
     stage("build") {
       steps {
         sh """
-          docker build -t hoath/web:1.0 .
+          docker build -t myweb:4.0 .
         """
       }
     }
     stage("run") {
       steps {
         sh """
-          docker run --name hoath-web -p 8080:8080 -d hoath/web:1.0
+          docker run --name myweb -p 8081:8080 -d myweb:4.0
         """
       }
     }
