@@ -3,12 +3,16 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        sh """
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pass', usernameVariable: 'user')]) {
+          // the code here can access $pass and $user
+          sh """
           docker build -t myweb:4.0 .
-          docker login -u tranhuuhoa -p
+          docker login -u $user -p $pass
           docker tag myweb:1.0 tranhuuhoa/myweb:4.0
           docker push tranhuuhoa/myweb:4.0
         """
+       }
+        
       }
     }
     stage("run") {
