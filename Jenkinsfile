@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh """
           docker build -t myweb:4.0 .
-          docker login -u tranhuuhoa
+          docker login -u tranhuuhoa -p
           docker tag myweb:1.0 tranhuuhoa/myweb:4.0
           docker push tranhuuhoa/myweb:4.0
         """
